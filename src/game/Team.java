@@ -14,7 +14,16 @@ package game;
  *
  * @author Sean Strout @ RIT CS
  */
+
 public enum Team {
     DRAGON,
-    LION
+    LION;
+
+    static Team valueOf(String name){
+
+    }
+
+    static Team[] values(){
+
+    }
 }
