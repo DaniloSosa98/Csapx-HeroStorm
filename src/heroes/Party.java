@@ -1,7 +1,7 @@
 package heroes;
 
 import game.Team;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,5 +43,5 @@ public interface Party {
      *
      * @return the party
      */
-    public List<Hero> getHeroes();
+    public ArrayList<Hero> getHeroes();
 }

@@ -5,43 +5,60 @@ import game.Team;
 public abstract class Hero extends Object{
 
     String name;
-    int hitPoint;
+    int hitPoints;
+    int MAX_HITPOINTS;
 
     protected Hero(String name, int hitPoints) {
+        this.name = name;
+        this.hitPoints = hitPoints;
+        this.MAX_HITPOINTS = hitPoints;
     }
 
-    abstract void attack(Hero enemy);
+    public abstract void attack(Hero enemy);
 
-    static Hero create(Heroes.Role role, Team team, Party party){
-
+    //Factory Method
+    public static Hero create(Heroes.Role role, Team team, Party party){
+        if(role == Heroes.Role.BERSERKER){
+            return new Berserker(team);
+        }else if(role == Heroes.Role.TANK){
+            return new Tank(team);
+        }else{
+            return new Healer(team, party);
+        }
     }
 
-    String getName(){
+    public String getName(){
 
         return this.name;
     }
 
-    abstract Heroes.Role getRole();
+    public abstract Heroes.Role getRole();
 
-    boolean hasFallen(){
-        if (this.hitPoint == 0){
+    public boolean hasFallen(){
+        if (this.hitPoints <= 0){
+            System.out.println(this.name + " has fallen!");
             return true;
         }
         return false;
     }
 
-    void heal(int amount){
+    public void heal(int amount){
+        /*if( (MAX_HITPOINTS - hitPoints) >= amount){
+            System.out.println(String.format("%1$s heals %2$s points", this.name, amount));
+        }else{
+            System.out.println(this.name + " hitpoints at max.");
+        }*/
 
-        this.hitPoint += amount;
+        this.hitPoints += amount;
     }
 
-    void takeDamage(int amount){
-
-        this.hitPoint -= amount;
+    public void takeDamage(int amount){
+        System.out.println(this.name + " takes " + amount + " damage");
+        this.hitPoints -= amount;
     }
 
     @Override
     public String toString() {
-        return this.name + " " + this.getRole() + " " + this.hitPoint;
+        return this.name + " " + this.getRole() + " " + this.hitPoints + "/" + this.MAX_HITPOINTS;
     }
 }

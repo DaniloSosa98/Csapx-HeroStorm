@@ -1,5 +1,7 @@
 package game;
 
+import org.jetbrains.annotations.Contract;
+
 /**
  * Represents the two teams, Team Dragon and Team Lion, as an enum.
  * An example of usage:<br>
@@ -15,15 +17,7 @@ package game;
  * @author Sean Strout @ RIT CS
  */
 
-public enum Team {
+public enum Team{
     DRAGON,
-    LION;
-
-    static Team valueOf(String name){
-
-    }
-
-    static Team[] values(){
-
-    }
+    LION
 }

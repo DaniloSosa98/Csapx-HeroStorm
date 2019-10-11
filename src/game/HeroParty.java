@@ -1,42 +1,51 @@
 package game;
 
-import heroes.Hero;
-import heroes.Party;
+import heroes.*;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class HeroParty extends Object implements Party{
 
     Team team;
     int seed;
+    protected ArrayList<Hero> list = new ArrayList<>();
 
     public HeroParty(Team team, int seed) {
         this.team = team;
         this.seed = seed;
+        this.list.add(Hero.create(Heroes.Role.BERSERKER, team, this));
+        this.list.add(Hero.create(Heroes.Role.HEALER, team, this));
+        this.list.add(Hero.create(Heroes.Role.TANK, team, this));
+        Collections.shuffle(this.list, new Random(seed));
     }
 
     @Override
     public void addHero(Hero hero) {
-
+        this.list.add(hero);
     }
 
     @Override
     public Hero removeHero() {
-        return null;
+        return list.remove(0);
     }
 
     @Override
     public int numHeroes() {
-        return 0;
+
+        return list.size();
     }
 
     @Override
     public Team getTeam() {
-        return null;
+
+        return this.team;
     }
 
     @Override
-    public List<Hero> getHeroes() {
-        return null;
+    public ArrayList<Hero> getHeroes() {
+
+        return this.list;
     }
 }
